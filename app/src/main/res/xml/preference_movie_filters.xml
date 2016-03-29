@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+        <ListPreference
+            android:key="@string/pref_movieinfo_sortby_key"
+            android:title="@string/pref_movieinfo_sortby_title"
+            android:entries="@array/pref_sortby_listentries"
+            android:entryValues="@array/pref_sortby_listentries_values"
+            android:defaultValue="@string/pref_sortby_array_default_value"
+            android:dialogTitle="@string/pref_movieinto_sortorder_dialog_title" />
+
+        <ListPreference
+            android:key="@string/pref_movieinfo_genre_key"
+            android:title="@string/pref_movieinfo_genre_title"
+            android:dialogTitle="@string/pref_movieinfo_genre_dialog_title"
+            android:entries="@array/listentries_no_internet"
+            android:entryValues="@array/listentries_no_internet_values" />
+        <!-- genre entries and values are added programmatically -->
+
+        <ListPreference
+            android:key="@string/pref_movieinfo_cert_key"
+            android:title="@string/pref_movieinfo_cert_title"
+            android:dialogTitle="@string/pref_movieinto_certification_dialog_title"
+            android:entries="@array/listentries_no_internet"
+            android:entryValues="@array/listentries_no_internet_values" />
+        <!-- certification entries and values are added programmatically -->
+
+    <SwitchPreferenceCompat
+        android:key="@string/pref_movieinfo_year_switch_key"
+        android:title="@string/pref_movieinfo_year_switch_title"
+        android:defaultValue="false" />
+
+    <!-- why doesn't inputType=number work on either of my devices? -->
+    <EditTextPreference
+        android:key="@string/pref_movieinfo_year_key"
+        android:inputType="number"
+        android:singleLine="true"
+        android:selectAllOnFocus="true"
+        android:maxLength="4"
+        android:dialogTitle="Show Movies Made In:"
+        android:dependency="@string/pref_movieinfo_year_switch_key"
+        android:shouldDisableView="false" />
+
+    <!--android:dependency="@string/pref_movieinfo_year_switch_key"-->
+
+</PreferenceScreen>

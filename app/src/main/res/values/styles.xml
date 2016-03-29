@@ -1,0 +1,26 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <!-- In order to make use of the AppCompat library, all themes must be from Theme.AppCompat -->
+    <!-- AppCompat allows older versions of Android to use a Toolbar, which is a more recent version of ActionBar -->
+    <!-- Theme.AppCompat is a dark theme -->
+    <style name="AppTheme" parent="Theme.AppCompat">
+
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+
+        <!-- preferenceTheme is needed for support v7 preference fragment use -->
+        <!-- preferenceTheme is a 'theme attribute' just like colorAccent, etc -->
+        <!-- but instead of referring to a specific value like a color, it refers -->
+        <!-- to another complete style, which itself may have attributes that contain specific values -->
+        <item name="preferenceTheme">@style/PreferenceThemeOverlay</item>
+
+
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+</resources>

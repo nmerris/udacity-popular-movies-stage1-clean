@@ -1,0 +1,69 @@
+<resources>
+
+    <!-- #### themoviedb related #### -->
+
+    <!-- REMOVE API KEY BEFORE UPLOADING TO GITHUB -->
+    <!-- Udacity reviewer: put your API key below -->
+    <string name="themoviedb_api_key" translatable="false">PUT API KEY HERE</string>
+    <!-- REMOVE API KEY BEFORE UPLOADING TO GITHUB -->
+
+    <!-- themoviedb does not return a json object for 'search all' so that option is added by this app -->
+    <string name="themoviedb_any_genre_filter_id_value" translatable="false">Any Genre</string>
+    <string name="themoviedb_any_genre_filter_name_value">Any Genre</string>
+    <string name="themoviedb_any_certification_filter_order_value" translatable="false">any-certification</string>
+    <string name="themoviedb_any_certification_filter_name_value">Any Rating</string>
+    <string name="themoviedb_any_certification_filter_meaning_value">Search All Available Ratings</string>
+
+    <!-- #### app/activity title related  #### -->
+    <string name="app_name">Popular Movies</string>
+    <string name="activity_preferences_title">Movie Filters</string>
+    <string name="activity_details_title">Movie Details</string>
+    <string name="activity_about_app">About</string>
+
+    <!-- #### menu related #### -->
+    <string name="action_movie_filters">Filter</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_about_app">About</string>
+
+    <!-- #### preference/settings related #### -->
+    <string name="pref_movieinfo_sortby_key" translatable="false">pref-movie-sort-key</string>
+    <string name="pref_movieinfo_sortby_title">Sort</string>
+    <string name="pref_sortby_array_default_value" translatable="false">popularity.desc</string>
+
+    <string name="pref_movieinfo_releasedate_dialog_title">Show Movies Made In:</string>
+    <string name="pref_movieinto_certification_dialog_title">Select A Rating</string>
+    <string name="pref_movieinfo_genre_dialog_title">Select A Genre</string>
+    <string name="pref_movieinto_sortorder_dialog_title">Sort Movies By:</string>
+
+    <string name="pref_movieinfo_genre_key" translatable="false">pref-movie-genre-key</string>
+    <string name="pref_movieinfo_genre_title">Genre</string>
+    <string name="pref_movieinfo_genre_default" translatable="false">search-all</string>
+    <string name="pref_movieinfo_cert_key" translatable="false">pref-movie-cert-key</string>
+    <string name="pref_movieinfo_cert_title">Rating</string>
+    <string name="pref_movieinfo_cert_default" translatable="false">search-all</string>
+    <string name="pref_movieinfo_year_title">Show Movies Made In</string>
+    <string name="pref_movieinfo_year_switch_summary_off">Show Movies Made In Any Year</string>
+    <string name="pref_movieinfo_year_key" translatable="false">pref-movie-year-key</string>
+    <string name="pref_movieinfo_year_switch_key" translatable="false">pref-movie-year-switch-key</string>
+    <string name="pref_movieinfo_year_switch_title">Year</string>
+    <string name="pref_movieinto_year_anyyear_title">Any Year</string>
+
+    <!-- error msgs -->
+    <string name="no_movies_message">Doh! There are no movies to show. Check your internet connection or try adjusting your movie filters.</string>
+
+    <!-- intent extras -->
+    <string name="EXTRA_MOVIE_FILTERS_HAVE_CHANGED" translatable="false">com.nate.popmoviess1.extra_movie_filters_changed</string>
+
+    <!-- movie detail fragment related -->
+    <string name="frag_movie_detail_release_date_title">Release Date</string>
+    <string name="frag_movie_detail_vote_avg_title">Vote Average</string>
+    <string name="frag_movie_detail_plot_summary_title">Plot Summary</string>
+
+    <!-- about app fragment related -->
+    <string name="about_app_usage_notes_title">Usage Notes</string>
+    <string name="about_app_about_author_technotes_title">About Author / Tech Notes</string>
+    <string name="about_app_usage_notes_content">This app displays a grid of movie posters based on the movie filter settings you select.  To avoid bogus results, only movies with a minimum total number of votes are shown, otherwise a single person can vote a horrible movie 10/10, and it would show up at the top of the list.  On phones, simply tap the filter button at the top of the screen, adjust the filters, and go back to see the new list of movies.  On tablets and larger devices, simply change the movie filters and watch as the list of movies is updated in real time!  To view the details of a single movie, click on the movie poster image.  From the details page, you can swipe left and right to view the details of the other movies from your movie list.</string>
+    <string name="about_app_about_author_content">This app was coded by Nathan Merris for the Udacity Popular Movies (stage 1) project.  Some technical notes: I used a singleton class (MovieTheater) to house movie, certification (G, PG-13, etc), and genre metadata.  SharedPreferences are used to persist the user\'s filter selections.  I would like to consolidate the movie metadata and the filter selection data to one persistent mechanism, perhaps an SQL light database.  I used an EditText for the movie year filter input, but a DatePicker would have been more appropriate.  Additionally, there is no validation for the year the user enters, so the API call just returns nothing when a user enters an invalid year.  Loss of internet connection does not break the app.  Messages are shown to the user in that case, but sometimes not until after the activity is recreated, I plan on making that feedback more immediate in stage 2 of this app.\n\nOne thing I did to make my app shine: making the movie list update in real time in tablet mode, so the user can watch the movies change as they modify the filter criteria.  Also, I perform additional API calls to grab a list of genres and their id\'s, and a list of movie certifications, so the user can have a more useful and interesting experience.  The ListPreference arrays for both are updated programmatically.  I also made sure that the user\'s selection defaults back to either \'Any Rating\' or \'Any Genre\' in the off chance that themoviedb changes any of the genre or certification names.  I think it is fun to filter down the movie list to see what were the lowest revenue R rated fantasy movies from any year.\n\nI have attempted to follow Model View Controller architecture, and my MVC diagrams can be found on this project\'s github page.  I have also made a mighty effort to follow best programming practices such as avoiding repeated code (so that modifying something in one place does not necessitate doing the same thing elsewhere), using inheritance and abstraction.  All fragments are completely independent and need know nothing about the Activities that host them.  I put a lot of effort into documentation, which is something I am very picky about.  Finally, I made sure this app only performs API calls as necessary, ie only when the user has changed one or more movie filter criteria.</string>
+    <string name="about_app_moviedb_attribution_content">This product uses the TMDb API but is not endorsed or certified by TMDb.</string>
+
+</resources>

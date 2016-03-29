@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:layout_gravity="center">
+
+    <!-- the first containter MUST have the same name as the single FrameLayout
+         in activity_single_fragment, or SingleFragmentActivity will fail -->
+    <FrameLayout
+        android:id="@+id/fragment_container"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="67"/>
+
+    <FrameLayout
+        android:id="@+id/container_second_pane"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="33"/>
+
+</LinearLayout>

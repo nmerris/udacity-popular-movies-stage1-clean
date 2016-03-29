@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+
+    <string-array name="pref_sortby_listentries">
+        <item>Most Popular</item>
+        <item>Highest Rated</item>
+        <item>Highest Revenue</item>
+        <item>Lowest Revenue</item>
+    </string-array>
+
+    <string-array name="pref_sortby_listentries_values">
+        <item>@string/pref_sortby_array_default_value</item>
+        <item>vote_average.desc</item>
+        <item>revenue.desc</item>
+        <item>revenue.asc</item>
+    </string-array>
+
+    <string-array name="listentries_no_internet">
+        <item>No Internet Connection</item>
+    </string-array>
+
+    <string-array name="listentries_no_internet_values">
+        <item>no_internet_connection</item>
+    </string-array>
+
+</resources>

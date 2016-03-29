@@ -1,0 +1,38 @@
+### Welcome to the wiki for Popular Movies (stage 1) by Nathan Merris!
+
+#### Usage Notes
+Popular Movies displays a grid of movie posters based on the movie filter settings you select.  To avoid bogus results, only movies with a minimum total number of votes are shown, otherwise a single person can vote a horrible movie 10/10, and it would show up at the top of the list.  On phones, simply tap the filter button at the top of the screen, adjust the filters, and go back to see the new list of movies.  On tablets and larger devices, simply change the movie filters and watch as the list of movies is updated in real time!  To view the details of a single movie, click on the movie poster image.  From the details page, you can swipe left and right to view the details of the other movies from your movie list.
+
+[same screenshot as the image below image download](https://drive.google.com/file/d/0B8gBPER4i72wSW5lMW5oLUlaRzQ/view?usp=sharing)
+
+![](https://drive.google.com/uc?export=download&id=0B8gBPER4i72wSW5lMW5oLUlaRzQ)
+
+[same MVC diagram as below image download](https://drive.google.com/uc?export=download&id=0B8gBPER4i72wRzR6all6a3E4a1U)
+
+![](https://drive.google.com/uc?export=download&id=0B8gBPER4i72wRzR6all6a3E4a1U)
+
+#### Technical Notes
+In Android Studio: use 'LOGTAG' as the logcat filter if you want to see what the guts of this app are doing, I tried to clean it up so that mostly useful info are ouputted.  The app also requires a themoviedb API key, which you must put in Strings resource xml file, it's at the very top and clearly marked.
+
+I used a singleton class (MovieTheater) to house movie, certification (G, PG-13, etc), and genre metadata.  The list of movies is persisted to SharedPreferences using Gson every time the user changes any movie filters, which triggers a call to `MovieTheater.updateMovies(List<Movie> movies)`.  MovieTheater's private constructor copies the list of movies from SharedPrefs every time it executes, which is usually once per 'app session'.  Specifically, this happens every time MovieTheater is killed for any reason.  This ensures that the list of Movies in MovieTheater is present and valid every time `MovieTheater.get()` is called, from any Activity, at any time, even if Android killed everything.
+
+I decided it would be neat if the user could select from a list of genres, certifications (G, PG, R, etc), release dates, and movie revenue sort parameters when filtering down the list of movies in the poster grid. I populate the ListPreference for genres and certs programmatically.  SharedPreferences are used to store the user's movie filter selections, but to make sure the lists are up to date, a `FetchGenresTask()` and a `FetchCertificationsTask()` are made once every time PreferencesFragment is created and sees that MovieTheater has an empty list of Genres and Certifications.  So basically that means the list prefs for both are updated every time MovieTheater is killed for any reason.
+
+I do not like that persistent data is being written in two different places, ie MovieTheater is in charge of persisting the list of Movies, but PreferencesFragment just overwrites the entries and values array for each ListPreference.  Ideally I would like MovieTheater to handle all Movie, Certification, and Genre data on it's own, including when and how to make it persistent.  In stage 2, I plan on cleaning that up.  Furthermore, in PreferencesFragment, I ended up having to basically write a new preference value to SharedPrefs immediately before the call to `onPreferenceChange` returns, which is pretty redundant considering that Android then just writes the same thing after that call returns.  This was necessary due to other design choices I made regarding how MovieGridFragment fetches a new list of movies.
+
+I used an EditText for the movie year filter input, but a DatePicker would have been more appropriate.  Additionally, there is no validation for the year the user enters, so the API call just returns nothing when a user enters an invalid year. 
+
+Loss of internet connection does not break the app.  Messages are shown to the user in that case, but sometimes not until after the activity is recreated, and currently no message is shown to indicate that a movie backdrop image could not be loaded.  I plan on making that feedback more immediate and consistent in stage 2 of this app. 
+
+One thing I did to make my app shine: making the movie list update in real time in tablet mode, so the user can watch the movies change as they modify the filter criteria.  Actually, tablet mode was not even a requirement for stage 1, but I got a bit carried away and ended up doing it anyway.  WOW!  That ended up being a lot more work than I thought, but I learned a ton about Android Activity lifecyle, the Activity stack, the Fragment stack, Bundles, onSaveInstanceState, resource qualifiers, layout references, etc.  I have no regrets! (thank you Stackoverflow, Udacity, and Big Nerd Ranch Android Programming book)
+
+A few other little details: the app always starts on first install with this filter selection: 'All Genres', 'Any Year', 'All Ratings', 'Most Popular'.  When 'All Ratings' are selected, themoviedb search parameter actually searches for ratings less than or equal to 'R'.  'NC-17' can be selected by the user manually, but that's the only way the app will search for that, that just seemed appropriate to me.  The year also defaults to the current year, so the first time you go in to filter by a specific release date, it will be prepopulated with '2016' (at the time of this writing.. it finds the current year programmatically so it will always be accurate in that respect).  This app is not designed to be used on devices with persistence turned off.
+
+I think it is fun to filter down the movie list to see what were the lowest revenue R rated fantasy movies from any year.  It takes this app from basic and kind of boring, to something you can actually have some fun with!  It's also interesting to just see what the most popular animated movies were in say, 1978. (Watership Down is in there, one of my personal favorites)
+
+I have followed Model View Controller architecture, please see the diagram above.  I have also made a mighty effort to follow best programming practices such as avoiding repeated code (so that modifying something in one place does not necessitate doing the same thing elsewhere), using inheritance and abstraction.  All fragments are completely independent and need know nothing about the Activities that host them.  This made for a more challenging initial attempt at writing for Android, but definitely paid off in the end, both in comprehension of how Android works, and in keeping the code manageable.  I put a lot of effort into documentation, which is something I am very picky about.  Finally, I made sure this app only performs API calls as necessary: only when the user has changed one or more movie filter criteria and the movie grid RecyclerView is on the screen.  
+
+Finally, while I did put some effort into making the app look nice, it is very simple.  The movie detail screen needs work as the backdrop image is too large for the screen in landscape mode (needs to be cropped and have some kind of text box overlap it at the bottom).  HomeActivity in tablet portrait mode is kind of ugly because the list of movie filters in the right pane only use a bout 1/3 of their containing layout.  It looks rather nice in landscape though, I think.
+
+Thank you for taking the time to read to this point... !
+ 

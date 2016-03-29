@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+
+    <item name="activity_home_ref" type="layout">@layout/activity_first_67pct_second_33pct</item>
+    <!--<item name="activity_preferences_ref" type="layout">@layout/activity_single_fragment</item>-->
+    <!--<item name="activity_aboutapp_ref" type="layout">@layout/activity_single_fragment</item>-->
+
+</resources>
